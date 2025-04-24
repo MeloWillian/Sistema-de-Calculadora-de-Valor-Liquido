@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Taxas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <h1>Calculadora de Valor Líquido</h1>
+
+    <form id="transaction-form">
+        <div class="form-group">
+            <label for="type">Tipo:</label>
+            <select id="type" name="type" required>
+                <option value="C">Crédito</option>
+                <option value="D">Débito</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Valor (R$):</label>
+            <input type="number" id="amount" name="amount" step="0.01" min="0.01" required>
+        </div>
+
+        <div class="form-group" id="installments-group">
+            <label for="installments">Parcelas:</label>
+            <input type="number" id="installments" name="installments" min="1" max="12" value="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="brand">Bandeira:</label>
+            <select id="brand" name="brand" required>
+                <option value="M">Mastercard</option>
+                <option value="H">Hipercard</option>
+            </select>
+        </div>
+
+        <button type="submit">Adicionar Transação</button>
+    </form>
+
+    <div id="results">
+        <h2>Resultados</h2>
+        <p>Valor Líquido da Última Transação: <strong id="current-net">R$ 0,00</strong></p>
+        <p>Montante Total Acumulado: <strong id="total-amount">R$ 0,00</strong></p>
+
+        <button type="button" id="reset-button">Zerar Montante Total</button>
+        <button type="button" id="download-excel">Gerar Excel</button>
+
+        <h3>Histórico de Transações</h3>
+        <table id="transaction-history">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Valor Bruto</th>
+                    <th>Parcelas</th>
+                    <th>Bandeira</th>
+                    <th>Taxa (%)</th>
+                    <th>Valor Líquido</th>
+                </tr>
+            </thead>
+            <tbody id="history-body">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
